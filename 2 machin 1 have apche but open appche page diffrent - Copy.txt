@@ -1,0 +1,14 @@
+    two machine  deb nat debt nat
+192.168.80/129    192.168.80.143
+
+deb 1 not install apche         deb 2 install apche
+
+sudo nanp /proc/sys/net/ipv4/ip_forward
+
+
+sudo iptables -t nat -A PREROTING -p tcp --dport 80 -j SNAT -p tcp --dport 80 -j dnat --to-destination 192.168.80.135:80
+
+
+#sudo iptables -t nat -A POSTROUTING -p tcp --dport 80 -j SNAT --to-SOURCE 192.168.80.129:8080
+
+sudo iptables -p tcp dport 192.168.80.129 --dport 80 -j SNAT --to -source 192.168.80.135

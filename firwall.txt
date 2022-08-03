@@ -1,0 +1,227 @@
+Create 2 deb  
+
+Install ssh , links and apache2 
+
+Test ssh and http on deb1 
+
+ssh 127.0.0.1 
+
+links http://127.0.0.1 
+
+q 
+
+Test ssh and http from deb1 to deb2 
+
+same from deb2 to deb1 
+
+ 
+
+on deb 1 inbound and forward should be drop and outbound should be accept 
+
+ 
+
+sudo iptables -L 
+
+sudo iptables -P FORWARD DROP 
+
+sudo iptables -P INPUT DROP 
+
+iptables -L 
+
+ 
+
+iptables -L INPUT 
+
+iptables -A INPUT -I lo -j ACCEPT [ A-Append/Add , j - jump to target ] 
+
+iptables -v -L INPUT ( if pkt and byte is 0 then its not working yet , ping to local host it will work) 
+
+ 
+
+iptables -L INPUT  
+
+iptables -A INPUT -m state  --state ESTABLISHED -j ACCEPT [m - module ] 
+
+ssh @deb2 
+
+iptables -v -L INPUT  
+
+save the rules otherwise after reboot everything will be gone 
+
+nano fw.sh 
+
+#!/bin/bash 
+
+#flush the iptable 
+
+iptables -F 
+
+#change default policy 
+
+sudo iptables -P FORWARD DROP 
+
+sudo iptables -P INPUT DROP 
+
+iptables -A INPUT -l lo -j ACCEPT 
+
+iptables -A INPUT -m state --state ESTABLISHED -j ACCEPT 
+
+mkdir /etc/iptables 
+
+iptables-save 
+
+iptables-save > /etc/iptables/rules.v4 
+
+apt-get install iptables-persistent 
+
+iptables -A INPUT -p tcp --dport ssh -s myip -j ACCEPT [ s- source ip ] 
+
+chmod 755 fw.ssh 
+
+apt-get update won't work we need to add http as well 
+
+iptables -A INPUT -p tcp --dport http -j ACCEPT 
+
+add any 5 input then delete any 1 in script 
+
+iptables -A INPUT -s ip -j ACCEPT 
+
+iptables -A INPUT -s ip -j ACCEPT 
+
+iptables -A INPUT -s ip -j ACCEPT 
+
+iptables -A INPUT -s ip -j ACCEPT 
+
+iptables -A INPUT -s ip -j ACCEPT 
+
+sudo iptables -L --line-numbers 
+
+sudo iptables -D input 6 
+
+sudo iptables -L --line-numbers 
+
+iptables -A INPUT -m iprange --src-range 80.10-80.20 -j ACCEPT 
+
+ 
+
+FAIL 2 BAN 
+
+ 
+
+apt-get install fail2ban 
+
+apt-get install fail2ban-client status 
+
+ apt-get install fail2ban-client status sshd 
+
+apt-get install fail2ban-client status sshd bantime 
+
+go to deb 2 and do ssh with wrong pass and check jail status in deb 1 
+
+ sudo ssh shuhari@ 
+
+ 
+
+Mangle uses for packet header manipulation 
+
+ Blocking other country access to ours server 
+
+ 
+
+Sudo apt-get install –y \ 
+
+xz-utils \ 
+
+gcc \ 
+
+libc6-dev \ 
+
+pkg-config \ 
+
+make \ 
+
+automake \ 
+
+iptables-dev \ 
+
+linux-headers-4.19.0-5-amd64 \ 
+
+libtext-csv-xs-perl \ 
+
+libnet-cidr-lite-perl \ 
+
+unzip 
+
+ 
+
+ cd /tmp 
+
+wget xtable-addons-3.2.tar.gz 
+
+ls –l 
+
+tar –xf addon.tar.xz 
+
+cd addon 
+
+ls 
+
+sudo ./configure 
+
+sudo make 
+
+sudo make install 
+
+cd 
+
+ls –l /usr/local/libecec/xtables-addons/ 
+
+nano /usr/local/libexec/xtable-addons/xt_geoip_dl 
+
+#!/bin/sh 
+
+change download url 
+
+change unzip filename 
+
+mkdir xtables 
+
+sudo mkdir /usr/share/xt_geoip 
+
+cd xtables/ 
+
+sudo /usr/local/libexec/xtables-addons/xt_geoip_dl 
+
+ls –l 
+
+cd geo 
+
+ls 
+
+sudo /usr/local/libexec/xtables-addons/xt_geoip_build –D /usr/share/xt_geoip 
+
+cd 
+
+either restarrt or run  
+
+sudo depmod –a 
+
+sudo iptables –m geoip –h [m is for match] 
+
+sudo iptables –A INPUT –m geoip  --src-cc  CN –j  LOG  --log-level debug  --log-prefix " | CKMKB |" 
+
+Block china ip- 
+
+Sudo iptables –A INPUT –m geoip –src—cc CN –j DROP 
+
+sudo iptables –L –v 
+
+Sudo apt-get intslal hping3 
+
+Sudo hping3 –a china ip own ip 
+
+sudo tail –f /var/log/syslog 
+
+ 
+
+check ip on iplocatio.org 

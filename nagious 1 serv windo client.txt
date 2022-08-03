@@ -1,0 +1,412 @@
+Nagios Server Installation 
+
+Pre-Flight Setup 
+
+configur hostname 
+
+static ip 
+
+configure apt 
+
+install and configure sudo 
+
+set time zone 
+
+install nagios core 
+
+install pre-requisite(dependencies) 
+
+download and extract nagios core 
+
+compile nagios core 
+
+create nagios user and group 
+
+Install binaries 
+
+install service/daemon 
+
+install command mode 
+
+install configuration files 
+
+install apache configuration files 
+
+create nagiosadmin auser account 
+
+verify nagios configuration 
+
+start apache 
+
+start nagios 
+
+install nagios plugins 
+
+install pre-requisites 
+
+download and extract nagios plugins 
+
+compile and install 
+
+test plugins 
+ sudo dpkg-reconfigure tzdata 
+
+sudo apt-get install -y \ 
+
+apache2 \ 
+
+apache2-utils \ 
+
+autoconf \ 
+
+gcc \ 
+
+libc6 \ 
+
+libgd-dev \ 
+
+make \ 
+
+php \ 
+
+python \ 
+
+python3 \ 
+
+unzip \ 
+
+wget 
+
+ 
+
+cd /tmp/ 
+
+wget -q nagios.tar.gz 
+
+ls -l 
+
+tar -xzf nagios.tar.gz 
+
+ls 
+
+cd nagios 
+
+sudo ./configure --with-httpd-conf=/etc/apache2/sites-enabled/ 
+
+sudo make all 
+
+sudo make install-groups-users 
+
+sudo passwd nagios 
+
+sudo usermod -a -G nagios www-data [ adding the user www-data to nagios group ] 
+
+ls -l /usr/local 
+
+sudo make install 
+
+ls -l /usr/local/nagios 
+sudo make install 
+
+ls -l /usr/local/nagios 
+
+ls -l /usr/local/nagios/bin 
+
+sudo make install-daemoninit 
+
+ls -l /usr/local/nagios/var/ 
+
+sudo make install-commandmode 
+
+ls -l /usr/local/nagios/var/ 
+
+ls -l /usr/local/nagios/var/rw 
+
+ls -l /usr/local/nagios/ 
+
+sudo make install-config 
+
+ls -l /usr/local/nagios/ 
+
+ls -l /usr/local/nagios/etc/ 
+
+ls -l /usr/local/nagios/etc/object/ 
+[ Everything is and object  
+
+ Objects derieved from classes 
+
+ attribute defined in class 
+
+ when we create an object it also got attribute ] 
+
+ 
+
+ 
+
+ls -l /etc/apache2/sites-enabled/ 
+
+sudo make install-webconf 
+
+ls /etc/apache2/sites-enabled/ 
+
+sudo a2enmod rewrite 
+
+sudo a2enmod cgi 
+
+sudo htpasswd -c /usr/local/nagios/etc/htpasswd.users nagiosadmin [ htpasswd or users ka s likhna hai] 
+
+nagios -v configfiles [ dont write in deb this is syntax] 
+
+sudo /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg [ v - for verify ] 
+
+sudo systemctl restart apache2 
+
+sudo systemctl start nagios  
+
+sudo systemctl status nagios  
+cd $home 
+
+sudo apt-get install -y \ 
+
+automake \ 
+
+autotools-dev \ 
+
+bc \ 
+
+build-essential \ 
+
+dc \ 
+
+gawk \ 
+
+gettext \ 
+
+libmcrypt-dev \ 
+
+libnet-snmp-perl \ 
+
+libssl-dev \ 
+
+snmp  
+
+cd /tmp/ 
+
+sudo wget -q nagiosplugin.tar.gz 
+
+sudo tar -xzf nagiosplugins.tar.gz 
+
+cd nagiosplugin  
+
+ls -l /usr/local/nagios 
+
+sudo ./tools/setup 
+
+sudo ./configure 
+
+sudo make 
+
+sudo make install 
+
+ls -l /usr/local/nagios/libexec (executable ke andr file aani chaiye) 
+
+go to web page  ip/nagios 
+ 
+
+Install NCPA in windows 
+
+work on 5693 port 
+
+windows ip:port 
+
+ 
+
+ cd $home 
+
+ls -l /usr/local/nagios/libexec/ | grep ncpa 
+
+cd /usr/local/nagios/libexec 
+
+sudo wget check_ccpa.py 
+
+ls -l | grep ncpa 
+
+sudo chmod 755 check_ncpa.py 
+
+sudo ./check_ncpa.py -V 
+
+sudo ./check_ncpa.py -t Password1234 -H 192.168.80.129/wind ip -M memory/virtual [ -t token , -M - memory ] 
+
+cd 
+
+ls -l /usr/local/nagios/etc/objects/ 
+
+[ Every plugin that we want to use in nagios it's defination should be in commands.cfg  file ] 
+
+sudo nano /usr/local/nagios/etc/objects/commands.cfg 
+
+define command { 
+
+command_name     check_ncpa 
+
+command_line         $USER$/check_ncpa.py -H $HOSTADDRESS$ $ARG1$ [ $USER$ define path of libexec file] 
+
+} 
+
+sudo nano /usr/local/nagios/etc/nagios.cfg 
+
+uncomment cfg_dir=/usr/local/nagios/etc/servers  
+
+sudo mkdir /usr/local/nagios/etc/servers 
+
+sudo nano /usr/local/nagios/etc/servers/win-7_1 
+
+ define host  { 
+
+use                     windows-server 
+
+host_name        win-7_1 
+
+alias                     windows 7 sys1 
+
+address                windows ip 
+
+max_check_attempts      5 
+
+} 
+
+will show an error you need to edit tempelate.cfg and comment hostgroup       windows-servers 
+
+ define service  { 
+
+use                                 generic-service 
+
+host_name                   win-7_1 
+
+service_description    NCPA Agent Version 
+
+check_command         check_ncpa!-t 'Password1234' -p -P 5693 -M system/agent_version 
+
+} 
+
+ 
+
+define service  { 
+
+use                               generic-service 
+
+host_name                 win-7_1 
+
+service_description  CPU Average 
+
+check_command       check_ncpa!-t 'Password1234' -p -P 5693 -M cpu/percent -w 20 -c 40 -q 'aggregate=avg' 
+
+} 
+
+verify 
+
+sudo systemctl restart nagios 
+
+
+
+MAKE ANOTHER CLIENT MACHINE 
+
+ 
+
+ 
+
+sudo apt-get install wget libsqlite3-0 
+
+cd /tmp/ 
+
+download ncpa.deb file 
+
+ls -l 
+
+sudo dpkg -i ncpa.deb 
+
+sudo nano /usr/local/ncpa/etc/ncpa.cfg 
+
+edit ommunit_string = Password1234 
+
+systemctl restart ncpa_listener 
+
+
+
+
+GO TO SERVER MACHINE 
+
+ 
+
+sudo /usr/local/nagios/libexec/check_ncpa.py -t Password1234 -H clientip -M system/agent_version 
+
+sudo /usr/local/nagios/libexec/check_ncpa.py -V  
+
+sudo nano /usr/local/nagios/etc/servers/deb_10-1.cfg 
+
+ 
+
+define host { 
+
+use                     linux-server 
+
+host_name       deb_10-1 
+
+alias                    Debian 10 Sys 1 
+
+address               debian ip 
+
+max_check_attempts      5 
+
+} 
+
+ 
+
+ define service  { 
+
+use                                 generic-service 
+
+host_name                   deb_10-1 
+
+service_description    Agent Version 
+
+check_command         check_ncpa!-t 'Password1234' -p -P 5693 -M system/agent_version 
+
+} 
+
+ 
+
+define service  { 
+
+use                               generic-service 
+
+host_name                 deb_10-1 
+
+service_description  Virtual Memory 
+
+check_command       check_ncpa!-t 'Password1234' -p -P 5693 -M memory/virtual -w 40 -c 70 -u G [ unit will show in Gigabyte]  
+
+} 
+
+verify  
+
+restart 
+
+ 
+
+ 
+
+For sending mail if a service is critical  
+
+nano usr/local/nagios/objects/contacts.cfg 
+
+set up sftp server user and password 
+
+nano /usr/local/nagios/etc/resource.cfg 
+
+check whom to notify 
+
+nano /usr/local/nagios/etc/command.cfg 
+ 
+
+

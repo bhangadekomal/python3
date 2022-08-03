@@ -1,0 +1,28 @@
+nginx machin
+
+ sudo apt-get update
+    9  sudo apt-get upgrade
+   10  sudo reboot
+   11  reboot
+   12  exit
+   13  sudo apt-get update
+   14  sudo apt-get upgrad
+sudo apt-get install nginx
+   62  sudo rm /etc/nginx/sites-enabled
+   63  sudo nano /etc/nginx/sites-available/rp.conf
+   64  sudo ln -s /etc/nginx/sites-available/rp.conf /etc/nginx/sites-enabled
+   65  sudo ls -l /etc/nginx/sites-enabled
+   66  sudo nginx -t -c /etc/nginx/nginx.conf
+   67  sudo systemctl restart nginx
+   68  sudo systemctl status nginx
+   69  sudo nano /etc/nginx/sites-available/rp.conf
+
+
+
+
+apacche machin
+
+
+sudo apt-get update
+   26  sudo apt-get install apache2
+   27  sudo apt-get update

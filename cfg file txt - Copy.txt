@@ -1,0 +1,23 @@
+
+define host {
+        use                  windows-server
+        host_name            win_7_1
+        alias                windows 7 sys 1
+        address              192.168.80.128
+        max_check_attempts   5
+}
+
+define service {
+        use                   generic-service
+        host_name             win_7_1
+        service_description   NCPA Agent Version
+        check_command         check_ncpa!-t'password123' -p -P 5693 -M system/agent_version
+}
+
+define service {
+        use                     generic-service
+        host_name               win_7_1
+        service_description     CPU Average
+        check_command           check_ncpa!-t'password123' -p -P 5693 -M cpu/percent -w 20 -c 40 -q 'aggregate=avg'
+}
+

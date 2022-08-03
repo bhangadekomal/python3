@@ -1,0 +1,40 @@
+deb1
+sudo nano /etc/ssh/sshd_config
+port2222 (line no 7)
+sudo reboot
+
+1  cd cowrie/
+2  source cowrie-env/bin/activate
+3  pip instal --upgrade pip
+4  pip install --upgrade pip
+5  pip install --upgrade -r requirements.txt
+6  cp etc/cowrie.cfg.dist etc/cowrie.
+7  nano etc/cowrie.cfg
+8  nano etc/userdb.txt
+9  bin/cowrie start
+10  bin/cowrie status
+11  ss -ant
+12  bin/cowrie start
+13  bin/cowrie status
+14  ss -ant
+
+duplicate deb1
+
+log
+
+
+
+
+
+
+deb2 
+ ssh root@192.168.80.160
+    5  1234
+    6  ping 192.168.80.160
+    7  ssh root@192.168.80.160
+    8  sudo wget -q http://192.168.1.151/notes.txt
+    9  sudo apt-get install wget
+   10  sudo wget -q http://192.168.1.151/notes.txt
+   11  sudo wget -q https://iacsd.com/index.php
+   12  ping 192.168.80.160
+   13  ssh root@192.168.80.160

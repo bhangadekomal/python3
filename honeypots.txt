@@ -1,0 +1,61 @@
+
+configure the deb mashine
+sudo nano /etc/ssh/sshd_config
+open fiel then go to the 
+Port 2222
+sudo reboo and exit
+goto putyy the change 2222
+open putty to shuhari
+sudo ss -ant
+sudo apt-get install -y\
+git \
+python-virtualenv \
+libssl-dev\
+build-essential\libpython3-dev \
+python3-minimal \
+authbind \
+virtualenv
+
+
+$ sudo addsuser --disabled-password cowrie
+
+$ sudo touch /etc/authbind/byport/22
+$ sudo chown cowrie:cowrie /etc/authbind/byport/22
+$ sudo chmod 777 /etc/authbind/byport/22
+sudo su - cowrie
+whoami
+
+
+whoami
+    2  cd pwd
+    3  cd
+    4  pwd
+    5  ls -l
+    6  git clone http://github.com/cowrie/cowrie
+    7  ls -l
+    8  cd cowrie
+    9  virtualenc --python=python3 cowrie-env
+   10  virtualenv --python=python3 cowrie-env
+   11  source cowrie-env/bin/activate
+   12  pip install --upgrade pip
+   13  pip install --upgrade -r requirements.txt
+   14  cp etc/cowrie.cfg.dist etc/cowrie.cfg
+   15  nano etc/cowrie.cfg
+       line no 585
+
+   16  nano etc/userdb.xtx
+root:x:!12345
+root:x:*
+   17  bin/cowrie start
+   18  bin/cowrie status
+   19  ss -ant
+
+second mashine
+
+
+   20  nano etc/cowrie.cfg
+ ssh root@192.168.80.131
+    2  ss root@192.168.80.131
+    3  ssh -o root@192.168.80.131
+    4  ssh root@192.168.80.131
+

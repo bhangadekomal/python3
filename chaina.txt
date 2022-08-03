@@ -1,0 +1,96 @@
+  1  sudo apt-get update
+    2  sudo apt-get install fail2ban
+    3  sudo fail2ban-client status
+    4  sudo fail2ban-client status sshd
+    5  sudo fail2ban-client status sshd bantime
+    6  sudo iptable -L
+    7  sudo iptables -L
+    8  fail2ban-server --version
+    9  sudo fail2ban-client status sshd
+   10  history
+   11  exit
+   12  sudo nano /etc/hosts
+   13  sudo nano /etc/hostname
+   14  sudo nano /etc/hosts
+   15  sudo apt-get update
+   16  clear
+   17  ip a
+   18  sudo apt-get install openssh-server
+   19  sudo reboot
+   20  sudo apt-get update
+   21  sudo apt-get install xz-utils gcc libc6-dev pkg-config make automake ipta                                                                                        bles-dev linux-headers-4.19.0-5-amd64 libtext-csv-xs-perl libnet-cidr-lite-perl                                                                                         unzip
+   22  cd /tmp
+   23  sudo apt-get install wget
+   24  cd
+   25  sudo apt-get install wget
+   26  history
+   27  sudo apt-get install wget
+   28  sudo apt-get install -y xz-utils gcc libc6-dev pkg-config make automake i                                                                                        ptables-dev linux-headers-4.19.0-5-amd64 libtext-csv-xs-perl libnet-cidr-lite-pe                                                                                        rl unzip
+   29  cd /tmp
+   30  wget http://192.168.1.151/sw/sec_tools/firewall/iptables/xtables-addons-3                                                                                        .2.tar.xz
+   31  ls -l
+   32  tar -xzf xtables-addons-3.2.tar.xz
+   33  sudo tar -xzf xtables-addons-3.2.tar.xz
+   34  sudo tar -xf xtables-addons-3.2.tar.xz
+   35  ls -l
+   36  cd xtables-addons-3.2
+   37  sudo ./configure
+   38  sudo make
+   39  sudo make install
+   40  ls -l /usr/local/libexec/xtables-addons/
+   41  cat /usr/local/libexec/xtables-addons/xt_geoip_dl
+   42  sudo mkdir /usr/share/xt_geoip
+   43  sudo mkdir /usr/share/xt_geoip_dl
+   44  ls -l
+   45  cd
+   46  ls -l /usr/local/libexec/xtables-addons/
+   47  cat /usr/local/libexec/xtables-addons/xt_geoip_dl
+   48  sudo nano /usr/local/libexec/xtables-addons/xt_geoip_dl
+   49  mkdir xtables
+   50  sudo mkdir /usr/share/xt_geoip
+   51  cd /usr
+   52  cd share
+   53  mkdir xt_geoip
+   54  cd
+   55  cd xtables/
+   56  sudo /usr/local
+   57  sudo /usr/local/libexec/xtables-addons/xt_geoip_dl
+   58  cd
+   59  sudo nano /usr/local/libexec/xtables-addons/xt_geoip_dl
+   60  cd xtables/
+   61  sudo nano /usr/local/libexec/xtables-addons/xt_geoip_dl
+   62  sudo /usr/local/libexec/xtables-addons/xt_geoip_dl
+   63  ls -l
+   64  sudo /usr/local/libexec/xtables-addons/xt_geoip_dl
+   65  sudo nano /usr/local/libexec/xtables-addons/xt_geoip_dl
+   66  sudo /usr/local/libexec/xtables-addons/xt_geoip_dl
+   67  ls -l
+   68  cat GeoLite2-Country-CSV_20191112/
+   69  cd GeoLite2-Country-CSV_20191112/
+   70  LS -L
+   71  ls -l
+   72  sudo /usr/local/libexec/xtables-addons/xt_geoip_build -D /usr/share/xt_ge                                                                                        oip/
+   73  ls -l /usr/share/xt_geoip
+   74  cd ..
+   75  sudo depmod -a
+   76  sudo iptables -m geoip -h
+   77  sudo iptables -A INPUT -m geoip --src -cc CN -j LOG --log-level debug --l                                                                                        og-prefix " | Traffic from your friend | "
+   78  sudo iptables -A INPUT -m geoip --src -cc CN -j LOG --log-level debug --l                                                                                        og-prefix "|Traffic from your friend|"
+   79  sudo iptables -A INPUT -m geoip --src-cc CN -j LOG --log-level debug --lo                                                                                        g-prefix " | Traffic from your friend | "
+   80  sudo iptables -L -V
+   81  sudo iptables -A INPUT -m geoip --src-cc CN -j LOG --log-level debug --lo                                                                                        g-prefix " | Traffic from your friend | "
+   82  sudo tail -f /var/log/syslog
+   83  cd
+   84  sudo iptables -L -V
+   85  sudo apt-get install hping3
+   86  sudo hping3 -a 1.8.1.1 192.168.80.129 -c 2-s
+   87  sudo hping3 -a 1.8.1.1 192.168.80.129 -c 5-s
+   88  cd /var/log
+   89  cat syslog
+   90  sudo cat syslog
+    91  cd
+   92  history
+   93  sudo iptables -A INPUT -m geoip --src-cc CN -j LOG --log-level debug --lo                                                                                        g-prefix " | Traffic from your friend | "
+   94  exit
+   95  history
+shuhari@deb3:~$
